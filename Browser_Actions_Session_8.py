@@ -8,3 +8,7 @@ Session 8 - Keyboard Actions
     * Clear the text using CTRL + A + DEL
 """
 
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from time import sleep
+
