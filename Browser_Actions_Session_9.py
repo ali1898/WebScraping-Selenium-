@@ -13,4 +13,3 @@ Session 9 - Mouse Actions
     * Drag and  Drop by Offset
     * Element Rect
 """
-
