@@ -60,7 +60,7 @@ actions = ActionChains(driver)
 #
 # el3 = driver.find_element('xpath', "//*[contains(@class, 'k-button-increase')]")  # Find element to click and hold
 # el4 = driver.find_element('xpath', "//*[contains(@class, 'k-button-decrease')]")
-# actions.click_and_hold(el3).pause(2).release().click_and_hold(el4).pause(2).perform()   # click and hold and pause for 3 second and release
+# actions.click_and_hold(el3).pause(2).release().click_and_hold(el4).pause(2).perform()
 # sleep(5)
 
 # # Drag and Drop (1)
@@ -81,10 +81,8 @@ actions = ActionChains(driver)
 driver.get("https://trytestingthis.netlify.app/")
 # Get Coordinates
 offset = driver.find_element("xpath", "//*[text()='Lets you select only one option']").location
-
-driver.execute_script("scroll(0, 500)")
-sleep(2)
+driver.execute_script("scroll(0, 300)")
 # move by offset
 driver.find_element("id", "option").click()
-actions.move_by_offset(offset['x'], offset['y']).pause(1).click().perform()
+actions.move_by_offset(xoffset=1, yoffset=1).pause(1).click().perform()
 sleep(5)
