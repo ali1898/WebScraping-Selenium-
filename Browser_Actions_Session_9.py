@@ -86,5 +86,6 @@ driver.execute_script("scroll(0, 500)")
 sleep(2)
 # move by offset
 driver.find_element("id", "option").click()
+
 actions.move_by_offset(offset['x'], offset['y']).pause(1).click().perform()
 sleep(5)
