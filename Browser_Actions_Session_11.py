@@ -26,4 +26,12 @@ driver.maximize_window()
 driver.implicitly_wait(2)
 
 # 'By' class
-driver.find_element(By.XPATH)
+# driver.find_element(By.XPATH)
+# driver.find_element(By.ID)
+
+# Get Text
+driver.get("https://material.angular.io/components/categories")
+el = driver.find_element(By.CLASS_NAME, 'mdc-button__label')
+attr = el.text
+print(attr)
+
