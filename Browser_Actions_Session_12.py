@@ -1,50 +1,66 @@
 """
-This Script can download application for windows
+Session 12 - Conditional Waits
+    * Sleep
+    * Implicitly
+    * Wait until element has an attribute
+    * Wait until element has not an attribute
+    * Wait until elements is disable/enable
+    * Wait until element is visible
+    * Wait until element is disappear
+    * WebDriverWait until Expected Conditions
+    * Wait until page is loaded
 """
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
-
-# ------------ This 4 line codes are for run the program in background without show chrom browser -------------
-# chrome_options = Options()  # make an instance from Options() class
-# chrome_options.add_argument("--incognito")  # open chrome driver in incognito session
-# chrome_options.add_argument("--headless")   # Run the program in background without show Chrome browser
-# driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=chrome_options)
-
-
-# ------------- This 4 line codes are for run the program with IDM extension to download apps -------------
-option = webdriver.ChromeOptions()
-option.add_extension(r"G:\webscraping\windows application download\ExtentionsForWebDriverSelenium\IDMGCExt.crx")
-driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=option)
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from time import sleep
+from datetime import datetime
 
 
-all_handles = driver.window_handles
-driver.switch_to.window(all_handles[0])
-# driver.maximize_window()
-driver.implicitly_wait(1)
+service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+actions = ActionChains(driver)
+driver.maximize_window()
+driver.implicitly_wait(3)
 
 
-lst_apps = ['https://soft98.ir/software/compress/21-winrar-full.html',
-            'https://soft98.ir/internet/web-browser/244-google-chrome-desktop.html',
-            'https://soft98.ir/internet/download-manager/4-internet-download-manager-4.html',
-            'https://soft98.ir/internet/remote-control/15737-anydesk-download.html',
-            ]
-
-xpath_list = ['//*[@id="dtill"]/dd[1]/a']
+# # Sleep
+# print(datetime.now())
+# sleep(1)
+# print(datetime.now())
 
 
-def download_app():
-    for item in lst_apps:
-        driver.get(item)
-        driver.execute_script("window.scrollTo(0, 2000)")
-        print("Getting the driver")
-        for xpath in xpath_list:
-            the_app = driver.find_element('xpath', xpath)
-            the_app.click()
-            driver.get(item)
-            print("The app is downloading....")
-    print("Download is Complete")
-    driver.quit()
+# # Implicitly
+# driver.get("https://play1.automationcamp.ir/index.html")
+# print(datetime.now())
+# try:
+#     driver.find_element(By.XPATH, "//*[text()='saldf']")
+# except:
+#     print(datetime.now())
 
 
-download_app()
+# Wait until element has an attribute
+driver.get("https://play1.automationcamp.ir/expected_conditions.html")
+
+
+def wait_until_element_has_an_attribute(element_selector, element_locator, attribute, attribute_value,timeout=5, exact=True):
+    for i in range(timeout * 5):
+        try:
+            element = driver.find_element(element_selector, element_locator)
+            if exact:
+                assert element.get_attribute(attribute) == attribute_value
+            else:
+                assert attribute_value in element.get_attribute(attribute)
+            return
+        except:
+            sleep(0.2)
+    raise Exception("Element attribute is not: " + str(attribute))
+
+
+trigger = driver.find_element(By.ID, "enabled_trigger")
+trigger.location_once_scrolled_into_view
+trigger.click()
+wait_until_element_has_an_attribute(By.ID, "enabled_target", 'class', 'success', exact=False)
