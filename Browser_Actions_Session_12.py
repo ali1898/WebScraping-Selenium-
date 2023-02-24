@@ -7,7 +7,7 @@ Session 12 - Conditional Waits
     * Wait until elements is disable/enable
     * Wait until element is visible
     * Wait until element is disappear
-    * WebDriverWait until Expected Conditions
+    * WebDriverWait until/until not Expected Conditions
     * Wait until page is loaded
 """
 from selenium import webdriver
@@ -18,6 +18,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from time import sleep
 from datetime import datetime
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 service = Service(executable_path=ChromeDriverManager().install())
@@ -133,41 +134,44 @@ driver.implicitly_wait(1)
 # print("Element is enabled now!")
 
 
-# Wait until element is visible
-def wait_until_elements_is_visible(element_selector,
-                                   element_locator,
-                                   timeout=5
-                                   ):
-    for i in range(timeout * 2):
-        try:
-            element = driver.find_element(element_selector, element_locator)
-            assert element.is_displayed()
-            print("Test is PASSED")
-            return
-        except:
-            sleep(0.5)
+# # Wait until element is visible
+# def wait_until_elements_is_visible(element_selector,
+#                                    element_locator,
+#                                    timeout=5
+#                                    ):
+#     for i in range(timeout * 2):
+#         try:
+#             element = driver.find_element(element_selector, element_locator)
+#             assert element.is_displayed()
+#             print("Test is PASSED")
+#             return
+#         except:
+#             sleep(0.5)
+#
+# # Wait until element is invisible
+# def wait_until_elements_is_invisible(element_selector,
+#                                      element_locator,
+#                                      timeout=2
+#                                      ):
+#     for i in range(timeout * 2):
+#         try:
+#             element = driver.find_element(element_selector, element_locator)
+#             assert not element.is_displayed()
+#             print("Test is PASSED")
+#             return
+#         except:
+#             sleep(0.5)
+#
+# driver.get("https://play1.automationcamp.ir/expected_conditions.html")
+# trigger = driver.find_element(By.ID, "visibility_trigger")
+# trigger.location_once_scrolled_into_view
+# print(driver.find_element(By.ID, "visibility_target").is_displayed())
+# wait_until_elements_is_invisible(By.ID, "visibility_target", 5)
+# print("Element is invisible before click!")
+# trigger.click()
+# wait_until_elements_is_visible(By.ID, "visibility_target", 6)
+# print(driver.find_element(By.ID, "visibility_target").is_displayed())
+# print("Element is visible after click!")
 
-# Wait until element is invisible
-def wait_until_elements_is_invisible(element_selector,
-                                     element_locator,
-                                     timeout=2
-                                     ):
-    for i in range(timeout * 2):
-        try:
-            element = driver.find_element(element_selector, element_locator)
-            assert not element.is_displayed()
-            print("Test is PASSED")
-            return
-        except:
-            sleep(0.5)
 
-driver.get("https://play1.automationcamp.ir/expected_conditions.html")
-trigger = driver.find_element(By.ID, "visibility_trigger")
-trigger.location_once_scrolled_into_view
-print(driver.find_element(By.ID, "visibility_target").is_displayed())
-wait_until_elements_is_invisible(By.ID, "visibility_target", 5)
-print("Element is invisible before click!")
-trigger.click()
-wait_until_elements_is_visible(By.ID, "visibility_target", 6)
-print(driver.find_element(By.ID, "visibility_target").is_displayed())
-print("Element is visible after click!")
+# WebDriverWait until/until not Expected Conditions
