@@ -104,37 +104,36 @@ driver.implicitly_wait(1)
 # print("Test case PASSED")
 
 
-# Wait until elements is disable/enable
-def wait_until_elements_is_enable(element_selector,
-                                 element_locator,
-                                 timeout
-                                  ):
-    for i in range(timeout * 2):
-        try:
-            element = driver.find_element(element_selector, element_locator)
-            assert element.is_enabled()
-            return
-        except:
-            sleep(0.5)
-
-
-def wait_until_elements_is_disable(element_selector,
-                                   element_locator,
-                                   timeout
-                                   ):
-    for i in range(timeout * 2):
-        try:
-            element = driver.find_element(element_selector, element_locator)
-            assert not element.is_enabled()
-            return
-        except:
-            sleep(0.5)
-
-driver.get("https://play1.automationcamp.ir/expected_conditions.html")
-trigger = driver.find_element(By.ID, "enabled_trigger")
-trigger.location_once_scrolled_into_view
-wait_until_elements_is_disable(By.ID, "enabled_target", 5)
-print("Element is Desable now!")
-trigger.click()
-wait_until_elements_is_enable(By.ID, "enabled_target", 5)
-print("Element is enabled now!")
+# # Wait until elements is disable/enable
+# def wait_until_elements_is_enable(element_selector,
+#                                  element_locator,
+#                                  timeout
+#                                   ):
+#     for i in range(timeout * 2):
+#         try:
+#             element = driver.find_element(element_selector, element_locator)
+#             assert element.is_enabled()
+#             return
+#         except:
+#             sleep(0.5)
+#
+# def wait_until_elements_is_disable(element_selector,
+#                                    element_locator,
+#                                    timeout
+#                                    ):
+#     for i in range(timeout * 2):
+#         try:
+#             element = driver.find_element(element_selector, element_locator)
+#             assert not element.is_enabled()
+#             return
+#         except:
+#             sleep(0.5)
+#
+# driver.get("https://play1.automationcamp.ir/expected_conditions.html")
+# trigger = driver.find_element(By.ID, "enabled_trigger")
+# trigger.location_once_scrolled_into_view
+# wait_until_elements_is_disable(By.ID, "enabled_target", 5)
+# print("Element is Desable now!")
+# trigger.click()
+# wait_until_elements_is_enable(By.ID, "enabled_target", 5)
+# print("Element is enabled now!")
