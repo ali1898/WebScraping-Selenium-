@@ -24,7 +24,7 @@ service = Service(executable_path=ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service)
 actions = ActionChains(driver)
 driver.maximize_window()
-driver.implicitly_wait(3)
+driver.implicitly_wait(1)
 
 
 # # Sleep
