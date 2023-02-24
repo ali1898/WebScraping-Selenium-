@@ -35,6 +35,7 @@ driver.implicitly_wait(3)
 
 # # Implicitly
 # driver.get("https://play1.automationcamp.ir/index.html")
+# driver.implicitly_wait(3)
 # print(datetime.now())
 # try:
 #     driver.find_element(By.XPATH, "//*[text()='saldf']")
