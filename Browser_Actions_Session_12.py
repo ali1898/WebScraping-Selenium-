@@ -47,7 +47,13 @@ driver.implicitly_wait(3)
 driver.get("https://play1.automationcamp.ir/expected_conditions.html")
 
 
-def wait_until_element_has_an_attribute(element_selector, element_locator, attribute, attribute_value,timeout=5, exact=True):
+def wait_until_element_has_an_attribute(element_selector,
+                                        element_locator,
+                                        attribute,
+                                        attribute_value,
+                                        timeout=5,
+                                        exact=True
+                                        ):
     for i in range(timeout * 5):
         try:
             element = driver.find_element(element_selector, element_locator)
