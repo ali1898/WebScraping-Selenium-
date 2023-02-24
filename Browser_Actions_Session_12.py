@@ -46,7 +46,6 @@ driver.implicitly_wait(3)
 # Wait until element has an attribute
 driver.get("https://play1.automationcamp.ir/expected_conditions.html")
 
-
 def wait_until_element_has_an_attribute(element_selector,
                                         element_locator,
                                         attribute,
