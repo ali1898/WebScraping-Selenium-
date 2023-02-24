@@ -44,8 +44,6 @@ driver.implicitly_wait(1)
 
 
 # Wait until element has an attribute
-driver.get("https://play1.automationcamp.ir/expected_conditions.html")
-
 def wait_until_element_has_an_attribute(element_selector,
                                         element_locator,
                                         attribute,
@@ -60,13 +58,47 @@ def wait_until_element_has_an_attribute(element_selector,
                 assert element.get_attribute(attribute) == attribute_value
             else:
                 assert attribute_value in element.get_attribute(attribute)
+            print(" Element attribute met: " + str(attribute_value))
             return
         except:
             sleep(0.2)
-    raise Exception("Element attribute is not: " + str(attribute))
+    raise Exception("Element attribute is not: " + str(attribute_value))
+
+# driver.get("https://play1.automationcamp.ir/expected_conditions.html")
+# trigger = driver.find_element(By.ID, "enabled_trigger")
+# trigger.location_once_scrolled_into_view
+# trigger.click()
+# wait_until_element_has_an_attribute(By.ID, "enabled_target", 'class', 'success', exact=False)
 
 
+# Wait until element has not an attribute
+def wait_until_element_has_not_an_attribute(element_selector,
+                                        element_locator,
+                                        attribute,
+                                        attribute_value,
+                                        timeout=5,
+                                        exact=True
+                                        ):
+    for i in range(timeout * 5):
+        try:
+            element = driver.find_element(element_selector, element_locator)
+            if exact:
+                assert element.get_attribute(attribute) != attribute_value
+            else:
+                assert attribute_value not in element.get_attribute(attribute)
+            print(" Element attribute not in or not equals: " + str(attribute_value))
+            return
+        except:
+            sleep(0.2)
+    raise Exception("Element attribute in or equals: " + str(attribute_value))
+
+
+driver.get("https://play1.automationcamp.ir/expected_conditions.html")
 trigger = driver.find_element(By.ID, "enabled_trigger")
 trigger.location_once_scrolled_into_view
+wait_until_element_has_an_attribute(By.ID, "enabled_target", 'class', 'danger', exact=False)
+wait_until_element_has_not_an_attribute(By.ID, "enabled_target", 'class', 'success', exact=False)
 trigger.click()
 wait_until_element_has_an_attribute(By.ID, "enabled_target", 'class', 'success', exact=False)
+wait_until_element_has_not_an_attribute(By.ID, "enabled_target", 'class', 'danger', exact=False)
+print("Test case PASSED")
