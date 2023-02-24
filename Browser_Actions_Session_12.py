@@ -62,14 +62,7 @@ driver.implicitly_wait(1)
 #             return
 #         except:
 #             sleep(0.2)
-#     raise Exception("Element attribute is not: " + str(attribute_value))
-#
-# # driver.get("https://play1.automationcamp.ir/expected_conditions.html")
-# # trigger = driver.find_element(By.ID, "enabled_trigger")
-# # trigger.location_once_scrolled_into_view
-# # trigger.click()
-# # wait_until_element_has_an_attribute(By.ID, "enabled_target", 'class', 'success', exact=False)
-#
+#     raise Exception("Element attribute is not: " + str(attribute_value)
 #
 # # Wait until element has not an attribute
 # def wait_until_element_has_not_an_attribute(element_selector,
@@ -117,6 +110,7 @@ driver.implicitly_wait(1)
 #         except:
 #             sleep(0.5)
 #
+# # Wait until elements is disable
 # def wait_until_elements_is_disable(element_selector,
 #                                    element_locator,
 #                                    timeout
@@ -137,3 +131,43 @@ driver.implicitly_wait(1)
 # trigger.click()
 # wait_until_elements_is_enable(By.ID, "enabled_target", 5)
 # print("Element is enabled now!")
+
+
+# Wait until element is visible
+def wait_until_elements_is_visible(element_selector,
+                                   element_locator,
+                                   timeout=5
+                                   ):
+    for i in range(timeout * 2):
+        try:
+            element = driver.find_element(element_selector, element_locator)
+            assert element.is_displayed()
+            print("Test is PASSED")
+            return
+        except:
+            sleep(0.5)
+
+# Wait until element is invisible
+def wait_until_elements_is_invisible(element_selector,
+                                     element_locator,
+                                     timeout=2
+                                     ):
+    for i in range(timeout * 2):
+        try:
+            element = driver.find_element(element_selector, element_locator)
+            assert not element.is_displayed()
+            print("Test is PASSED")
+            return
+        except:
+            sleep(0.5)
+
+driver.get("https://play1.automationcamp.ir/expected_conditions.html")
+trigger = driver.find_element(By.ID, "visibility_trigger")
+trigger.location_once_scrolled_into_view
+print(driver.find_element(By.ID, "visibility_target").is_displayed())
+wait_until_elements_is_invisible(By.ID, "visibility_target", 5)
+print("Element is invisible before click!")
+trigger.click()
+wait_until_elements_is_visible(By.ID, "visibility_target", 6)
+print(driver.find_element(By.ID, "visibility_target").is_displayed())
+print("Element is visible after click!")
