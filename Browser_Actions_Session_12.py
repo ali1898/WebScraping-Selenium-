@@ -175,3 +175,25 @@ driver.implicitly_wait(1)
 
 
 # WebDriverWait until/until not Expected Conditions
+# driver.get("https://play1.automationcamp.ir/expected_conditions.html")
+# trigger = driver.find_element(By.ID, "enabled_trigger")
+# trigger.location_once_scrolled_into_view
+# trigger.click()
+# wait = WebDriverWait(driver, 3)
+# element = wait.until(EC.element_to_be_clickable((By.ID, "enabled_trigger")))
+# print(element)
+
+
+# Wait until page is loaded
+def wait_until_page_is_loaded(timeout = 10):
+    for i in range(timeout * 2):
+        try:
+            state = driver.execute_script("return document.readyState")
+            assert state == 'complete'
+            print("State is: ", str(state))
+            return
+        except:
+            sleep(0.5)
+
+driver.get("https://archive.org/details/biodiversity")
+wait_until_page_is_loaded()
